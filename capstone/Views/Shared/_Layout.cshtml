@@ -1,0 +1,64 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - capstone</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/capstone.styles.css" asp-append-version="true" />
+</head>
+<body>
+    <div class="b-example-divider"></div>
+
+    <nav class="py-2 bg-light border-bottom">
+        <div class="container d-flex flex-wrap">
+            <ul class="nav me-auto">
+                <li class="nav-item"><a href="#" class="nav-link link-dark px-2 active" aria-current="page">Home Page</a></li>
+            </ul>
+            <ul class="nav">
+                <li class="nav-item"><a href="#" class="nav-link link-dark px-2">로그인</a></li>
+                <li class="nav-item"><a href="#" class="nav-link link-dark px-2">회원가입</a></li>
+            </ul>
+        </div>
+    </nav>
+   
+        <header class="py-3 mb-3 border-bottom">
+            <div class="container-fluid d-grid gap-3 align-items-center" style="grid-template-columns: 1fr 2fr;width: 1200px;">
+            <div class="dropdown">
+                <a href="#" class="d-flex align-items-center col-lg-4 mb-2 mb-lg-0 link-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                    카테고리별 보기
+                </a>
+                <ul class="dropdown-menu text-small shadow">
+                    <li><a class="dropdown-item" href="#">CPU</a></li>
+                    <li><a class="dropdown-item" href="#">그래픽카드</a></li>
+                    <li><a class="dropdown-item" href="#">메인보드</a></li>
+                    <li><a class="dropdown-item" href="#">RAM</a></li>
+                    <li><a class="dropdown-item" href="#">HDD</a></li>
+                    <li><a class="dropdown-item" href="#">SSD</a></li>
+                    <li><a class="dropdown-item" href="#">케이스</a></li>
+                </ul>
+            </div>
+            <form class="w-600 me-3" role="search">
+                <input type="search" class="form-control" placeholder="Search..." aria-label="Search">
+            </form>
+        </div>
+    </header>
+
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2023 - capstone - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
