@@ -1,0 +1,22 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "컴퓨터 쇼핑몰";
+}
+<table class="table">
+    <thead>
+        <tr>
+            <td>
+                <img src="~/images/B660_Mainboard.jpg" width="500px" height="500px"/>
+            </td>
+            <td class="align-content-center">
+                <br />
+                <h2>B660 메인보드</h2><br /><br />
+                <h3>100,000원</h3><br /><hr />
+                <input type="button" class="btn btn-primary" value="장바구니" asp-area="" asp-controller="User" asp-action="Cart" />
+                <input type="button" class="btn btn-primary" value="즉시구매" asp-area="" asp-controller="User" asp-action="Payment" />
+            </td>
+        </tr>
+    </thead>
+</table>

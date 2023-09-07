@@ -14,11 +14,11 @@
     <nav class="py-2 bg-light border-bottom">
         <div class="container d-flex flex-wrap">
             <ul class="nav me-auto">
-                <li class="nav-item"><a href="#" class="nav-link link-dark px-2 active" aria-current="page">Home Page</a></li>
+                <li class="nav-item"><a class="nav-link link-dark px-2 active" aria-current="page" asp-area="" asp-controller="Home" asp-action="Index">Home Page</a></li>
             </ul>
             <ul class="nav">
-                <li class="nav-item"><a href="#" class="nav-link link-dark px-2">로그인</a></li>
-                <li class="nav-item"><a href="#" class="nav-link link-dark px-2">회원가입</a></li>
+                <li class="nav-item"><a class="nav-link link-dark px-2" asp-area="" asp-controller="Login" asp-action="Login">로그인</a></li>
+                <li class="nav-item"><a class="nav-link link-dark px-2" asp-area="" asp-controller="Login" asp-action="Registor">회원가입</a></li>
             </ul>
         </div>
     </nav>
@@ -26,21 +26,29 @@
         <header class="py-3 mb-3 border-bottom">
             <div class="container-fluid d-grid gap-3 align-items-center" style="grid-template-columns: 1fr 2fr;width: 1200px;">
             <div class="dropdown">
-                <a href="#" class="d-flex align-items-center col-lg-4 mb-2 mb-lg-0 link-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                <a class="d-flex align-items-center col-lg-4 mb-2 mb-lg-0 link-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" 
+                asp-area="" asp-controller="Product" asp-action="CategoryList">
                     카테고리별 보기
                 </a>
-                <ul class="dropdown-menu text-small shadow">
-                    <li><a class="dropdown-item" href="#">CPU</a></li>
+                <select id="categoryDropdown" class="form-control dropdown-menu text-small shadow">
+                    <option value="CPU">CPU</option>
+                    <option value="그래픽카드">그래픽카드</option>
+                    <option value="메인보드">메인보드</option>
+                    <option value="RAM">RAM</option>
+                    <option value="HDD">HDD</option>
+                    <option value="SSD">SSD</option>
+                    <option value="케이스">케이스</option>
+                    @*<li><a class="dropdown-item" href="#">CPU</a></li>
                     <li><a class="dropdown-item" href="#">그래픽카드</a></li>
                     <li><a class="dropdown-item" href="#">메인보드</a></li>
                     <li><a class="dropdown-item" href="#">RAM</a></li>
                     <li><a class="dropdown-item" href="#">HDD</a></li>
                     <li><a class="dropdown-item" href="#">SSD</a></li>
-                    <li><a class="dropdown-item" href="#">케이스</a></li>
-                </ul>
+                    <li><a class="dropdown-item" href="#">케이스</a></li>*@
+                </select>
             </div>
-            <form class="w-600 me-3" role="search">
-                <input type="search" class="form-control" placeholder="Search..." aria-label="Search">
+            <form class="w-600 me-3" role="search" asp-area="" asp-controller="Product" asp-action="Search">
+                <input type="search" class="form-control" placeholder="Search..." aria-label="Search" >
             </form>
         </div>
     </header>
@@ -59,6 +67,20 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script>
+        document.getElementById("categoryDropdown").addEventListener("change", function () {
+            var selectedCategory = this.value;  // 선택된 항목의 값 가져오기
+
+            // 선택된 항목에 따라 이동할 URL 생성
+            //var url = 'Url.Action("Index", "Product")/category=' + encodeURIComponent(selectedCategory);
+            var url = '@Url.Action("CategoryList", "Product")'
+
+            //var url = '@Url.Action("Category", "Product")?category=' + encodeURIComponent(selectedCategory);
+            
+            // URL로 이동
+            window.location.href = url;
+        });
+    </script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

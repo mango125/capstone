@@ -3,3 +3,199 @@
 *@
 @{
 }
+<style>
+    .categoryclass{
+        position:fixed;
+        left:50%;
+        margin-left:-800px;
+    }
+</style>
+<div class="categoryclass">  <!--좌측 리스트 내용-->
+    <div class="list-group">
+        <a href="#" class="list-group-item">CPU</a>
+        <a href="#" class="list-group-item">그래픽카드</a>
+        <a href="#" class="list-group-item">RAM</a>
+        <a href="#" class="list-group-item">케이스</a>
+        <a href="#" class="list-group-item active">메인보드</a>
+        <a href="#" class="list-group-item">저장장치</a>
+        <!-- 카테고리 항목을 추가할 수 있습니다 -->
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+            <div class="col">  <!--본문내용-->
+            <!--상단 카테고리 선택 페이지-->
+                <h2>카테고리 선택 페이지 입니다.</h2>
+                <!--상단 카테고리 테이블-->
+                <div class="table-responsive">
+                    <table class="table table-bordered ">
+                        <tbody>
+                            
+                            <tr>
+                                <td class="table-primary">
+                                    카테고리
+                                </td>
+                                <td colspan="4" class="text-center">
+                                <input type="radio" name="category" value="cpu" /> <label>CPU</label> &nbsp;&nbsp;
+                                <input type="radio" name="category" value="vga" /><label>그래픽카드</label>&nbsp;&nbsp;
+                                <input type="radio" name="category" value="mainboard" /><label>메인보드</label>&nbsp;&nbsp;
+                                <input type="radio" name="category" value="case" /><label>케이스</label>&nbsp;&nbsp;
+                                <input type="radio" name="category" value="ram" /><label>ram</label>&nbsp;&nbsp;
+                                <input type="radio" name="category" value="ssd" /><label>SSD</label>&nbsp;&nbsp;
+                                    <input type="radio" name="category" value="hdd" /><label>HDD</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="table-primary">
+                                    제조사별
+                                </td>
+                                <td>
+                                    <input type="checkbox" value="cpu" />
+                                    ASUS
+                                </td>
+                                <td>
+                                    <input type="checkbox" value="vga" />
+                                    MSI
+                                </td>
+                                <td>
+                                    <input type="checkbox" value="ram" />
+                                    GIGABITY
+                                </td>
+                                <td>
+                                    <input type="checkbox" value="case" />
+                                    ASRock
+                                </td>
+                                @*<td>
+                                <input type="checkbox" value="ssd" />
+                                BIOSTAR
+                                </td>*@
+                            </tr>
+                            <tr>
+                                <td class="table-primary">
+                                    CPU 소켓
+                                </td>
+                                <td>
+                                    <input type="checkbox" value="cpu" />
+                                    인텔(소켓1700)
+                                </td>
+                                <td>
+                                    <input type="checkbox" value="vga" />
+                                    인텔(소켓1200)
+                                </td>
+                                <td>
+                                    <input type="checkbox" value="ram" />
+                                    AMD(소켓AM5)
+                                </td>
+                                <td>
+                                    <input type="checkbox" value="case" />
+                                    AMD(소켓AM4)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="table-primary">
+                                    폼펙터
+                                </td>
+                                <td>
+                                    <input type="checkbox" value="cpu" />
+                                    ATX(30.5x24.4cm)
+                                </td>
+                                <td>
+                                    <input type="checkbox" value="vga" />
+                                    M-ATX(24.4x24.4cm)
+                                </td>
+                                <td>
+                                    <input type="checkbox" value="ram" />
+                                    M-iTX(17.0x17.0cm)
+                                </td>
+                                <td>
+                                    <input type="checkbox" value="case" />
+                                    E-ATX(30.5x33.0cm)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="table-primary">
+                                    메모리 종류
+                                </td>
+                                <td>
+                                    <input type="checkbox" value="cpu" />
+                                    DDR5
+                                </td>
+                                <td>
+                                    <input type="checkbox" value="vga" />
+                                    LPDDR5
+                                </td>
+                                <td>
+                                    <input type="checkbox" value="ram" />
+                                    DDR4
+                                </td>
+                                <td>
+                                    <input type="checkbox" value="case" />
+                                    LPDDR4
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="table-primary">
+                                    메모리 슬롯
+                                </td>
+                                <td>
+                                    <input type="checkbox" value="cpu" />
+                                    5개 이상
+                                </td>
+                                <td>
+                                    <input type="checkbox" value="vga" />
+                                    4개
+                                </td>
+                                <td>
+                                    <input type="checkbox" value="ram" />
+                                    2개
+                                </td>
+                                <td>
+                                    <input type="checkbox" value="case" />
+                                    1개
+                                </td>
+                            </tr>
+
+                            
+                        </tbody>
+                    </table>
+                        <button class="btn btn-primary">검색하기</button>
+                </div>
+                <div>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>
+                                    전체상품
+                                </th>
+                                <th>
+                                    품절상품
+                                </th>
+                                <th class="text-right">
+                                    <select>
+                                        <option>낮은가격순</option>
+                                        <option>높은가격순</option>
+                                        <option>리뷰많은순</option>
+                                    </select>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr style="vertical-align: middle;">
+                            <td><img src="~/images/B660_MainBoard.JPG" style="width: 200px;height:200px"  /></td>
+                                <td>
+                                <a asp-area="" asp-controller="Product" asp-action="B660M">ASUS B660M</a><div class="small text-muted">
+                                        인텔(소켓1700) / 인텔 B660 / M-ATX(24.4x21.1cm)<br />메모리 DDR4 / 5333MHz (PC4-42600) / 2개 / 메모리 용량: 최대 64GB / XMP / 옵테인 /<br />
+                                        확장슬롯 VGA 연결: PCIe4.0 x16 / PCIe버전: PCIe4.0, PCIe3.0, PCIe / PCIex16: 1개 / PCIex1: 2개 /<br /><br />
+                                        등록일:2023.01.01 | 리뷰갯수:1,000개
+                                    </div>
+                                </td>
+                                <td class="text-center">
+                                <h5>100,000원</h5><button type="button" class="btn btn-primary" asp-area="" asp-controller="Product" asp-action="ProductInfo">장바구니</button><i class="bi bi-bucket"></i>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+        </div>
+    </div>
+</div>
+</div>
