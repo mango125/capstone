@@ -7,10 +7,11 @@ namespace capstone.DataContext
     {
         public ShoppingmallDbContext(DbContextOptions<ShoppingmallDbContext> options) : base(options) 
         { 
+
         }
 
-        public DbSet<Member> Members { get; set; }
-
+        public DbSet<Member> Member { get; set; }
+        public DbSet<MemberLogin> MemberLogin { get; set; }
         
     }
 }

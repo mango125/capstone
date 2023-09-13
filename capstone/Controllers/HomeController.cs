@@ -16,24 +16,34 @@ namespace capstone.Controllers
 
         public IActionResult Index()
         {
-            //여기서 쿼리문 실행할려고 했었는데 뭐 인증이 발행이 안된다 뭐다 어지러워서 일단 여기서 종료함
-            Member member = new Member();
-            var query = "exec ProcTest";
-            var result = _db.Members.FromSqlRaw(query).ToList();
-
-
             return View();
         }
 
         public IActionResult Privacy()
         {
-            return View();
+            return View(); // 또는 오류 페이지로 리디렉션
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        public IActionResult Select()
+        {
+            var member = new Member();
+            var query = _db.Member.FromSqlRaw("exec ProcText").ToList();
+            member = query.SingleOrDefault();
+            return View("Index",member);
+        }
+
+        public IActionResult ChkLogin()
+        {
+            var member = new Member();
+            var query = _db.Member.FromSqlRaw("exec ProcText").ToList();
+            member = query.SingleOrDefault();
+            return View("Index", member);
         }
     }
 }

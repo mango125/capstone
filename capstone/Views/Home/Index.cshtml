@@ -1,10 +1,39 @@
 ﻿@{
     ViewData["Title"] = "컴퓨터 쇼핑몰";
 }
+@model List<Member>
+
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $("#executeQueryButton").click(function () {
+                // 쿼리 실행 코드를 여기에 추가
+                $.get("/ControllerName/ActionName", function (data) {
+                    // 결과를 처리하는 코드
+                });
+            });
+        });
+    </script>
+}
 
 <div class="container-fluid">
     <div class="bg d-flex align-items-center justify-content-center">
         <span class="text-white display-1 d-flex align-items-center justify-content-center">메인페이지 </span>
 
+        @*테스트용 버튼 생성*@
+       @* @foreach (var member in Model)
+        {
+            <tr>
+                <td>@member.id</td>
+                <td>@member.pw</td>
+                <td>@member.name</td>
+            </tr>
+        }*@
+        <div>
+            <form asp-action="Select" asp-controller="Home">
+                <input class="btn btn-primary" type="submit" value="select" />
+            </form>
+        </div>
     </div>
 </div>

@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor Accessor
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -17,8 +20,17 @@
                 <li class="nav-item"><a class="nav-link link-dark px-2 active" aria-current="page" asp-area="" asp-controller="Home" asp-action="Index">Home Page</a></li>
             </ul>
             <ul class="nav">
-                <li class="nav-item"><a class="nav-link link-dark px-2" asp-area="" asp-controller="Login" asp-action="Login">로그인</a></li>
-                <li class="nav-item"><a class="nav-link link-dark px-2" asp-area="" asp-controller="Login" asp-action="Registor">회원가입</a></li>
+                
+                @if (Accessor.HttpContext.Session.GetString("userid")==null)
+                {
+                    <li class="nav-item"><a class="nav-link link-dark px-2" asp-area="" asp-controller="Member" asp-action="Login">로그인</a></li>
+                    <li class="nav-item"><a class="nav-link link-dark px-2" asp-area="" asp-controller="Member" asp-action="Registor">회원가입</a></li>
+                }
+                else
+                {
+                    <li class="nav-item"><a class="nav-link link-dark px-2" asp-area="" asp-controller="Member" asp-action="Index">마이페이지</a></li>
+                    <li class="nav-item"><a class="nav-link link-dark px-2" asp-area="" asp-action="Logout" asp-controller="Member">로그아웃</a></li>
+                }
             </ul>
         </div>
     </nav>
