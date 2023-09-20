@@ -30,21 +30,22 @@
                 <div class="table-responsive">
                     <table class="table table-bordered ">
                         <tbody>
+                        <tr>
+                            <td class="table-primary">
+                                카테고리
+                            </td>
                             
-                            <tr>
-                                <td class="table-primary">
-                                    카테고리
-                                </td>
-                                <td colspan="4" class="text-center">
+                            <td colspan="4" class="text-center">
                                 <input type="radio" name="category" value="cpu" /> <label>CPU</label> &nbsp;&nbsp;
                                 <input type="radio" name="category" value="vga" /><label>그래픽카드</label>&nbsp;&nbsp;
                                 <input type="radio" name="category" value="mainboard" /><label>메인보드</label>&nbsp;&nbsp;
                                 <input type="radio" name="category" value="case" /><label>케이스</label>&nbsp;&nbsp;
                                 <input type="radio" name="category" value="ram" /><label>ram</label>&nbsp;&nbsp;
                                 <input type="radio" name="category" value="ssd" /><label>SSD</label>&nbsp;&nbsp;
-                                    <input type="radio" name="category" value="hdd" /><label>HDD</label>
-                                </td>
-                            </tr>
+                                <input type="radio" name="category" value="hdd" /><label>HDD</label>
+                            </td>
+                        </tr>
+                         
                             <tr>
                                 <td class="table-primary">
                                     제조사별
@@ -180,19 +181,24 @@
                             </tr>
                         </thead>
                         <tbody>
+                             @foreach (var product in ViewBag.productInfo)
+                            {
                             <tr style="vertical-align: middle;">
-                            <td><img src="~/images/B660_MainBoard.JPG" style="width: 200px;height:200px"  /></td>
+
+                                <td><a href="/Product/Read?@product.productNum"><img src="@product.image" style="width: 200px;height:200px" /></a></td>
                                 <td>
-                                <a asp-area="" asp-controller="Product" asp-action="B660M">ASUS B660M</a><div class="small text-muted">
+                                   
+                                <a href="/Product/Read?@product.productNum">@product.name</a><div class="small text-muted">
                                         인텔(소켓1700) / 인텔 B660 / M-ATX(24.4x21.1cm)<br />메모리 DDR4 / 5333MHz (PC4-42600) / 2개 / 메모리 용량: 최대 64GB / XMP / 옵테인 /<br />
                                         확장슬롯 VGA 연결: PCIe4.0 x16 / PCIe버전: PCIe4.0, PCIe3.0, PCIe / PCIex16: 1개 / PCIex1: 2개 /<br /><br />
                                         등록일:2023.01.01 | 리뷰갯수:1,000개
                                     </div>
                                 </td>
                                 <td class="text-center">
-                                <h5>100,000원</h5><button type="button" class="btn btn-primary" asp-area="" asp-controller="Product" asp-action="ProductInfo">장바구니</button><i class="bi bi-bucket"></i>
-                                </td>
+                                    <h5> @string.Format("{0:#,0}", @product.price)</h5><button type="button" class="btn btn-primary" asp-area="" asp-controller="Product" asp-action="ProductInfo">장바구니</button><i class="bi bi-bucket"></i>
+                                </td> 
                             </tr>
+                            }
                         </tbody>
                     </table>
         </div>
