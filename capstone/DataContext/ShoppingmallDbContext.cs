@@ -13,5 +13,6 @@ namespace capstone.DataContext
         public DbSet<Member> Member { get; set; }
         public DbSet<MemberLogin> MemberLogin { get; set; }
         
+        public DbSet<ProductInfo> ProductInfo { get; set; }
     }
 }
