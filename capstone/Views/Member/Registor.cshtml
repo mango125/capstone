@@ -3,64 +3,56 @@
 *@
 @{
 }
+@model Member
+
 <div class="container">
     <div class="input-form-backgroud row">
         <div class="input-form col-md-12 mx-auto">
             <h4 class="mb-3">회원가입</h4>
-            <form class="validation-form" novalidate>
+
+           
+            <form asp-action="RegistorProc" asp-controller="Member">
                 <div class="mb-3">
-                    <label for="id">아이디</label>
-                    <input type="text" class="form-control" id="id" placeholder="" value="" required>
+                    <label>아이디</label>
+                    <input type="text" class="form-control" asp-for="userid" required>
                     <div class="invalid-feedback">
                         아이디를 입력해주세요.
                     </div>
                 </div>
                 <div class="mb-3">
-                    <label for="pw">비밀번호</label>
-                    <input type="text" class="form-control" id="pw" placeholder="" value="" required>
+                    <label>비밀번호</label>
+                    <input type="text" class="form-control" asp-for="userpw" required>
                     <div class="invalid-feedback">
                         비밀번호를 입력해주세요.
                     </div>
                 </div>
                 <div class="mb-3">
-                    <label for="name">이름</label>
-                    <input type="text" class="form-control" id="name" placeholder="" value="" required>
+                    <label>이름</label>
+                    <input type="text" class="form-control" asp-for="name" required>
                     <div class="invalid-feedback">
                         이름을 입력해주세요.
                     </div>
                 </div>
                 <div class="mb-3">
-                    <label for="name">닉네임</label>
-                    <input type="text" class="form-control" id="nickname" placeholder="" value="" required>
+                    <label>닉네임</label>
+                    <input type="text" class="form-control" asp-for="nickname" placeholder="" required>
                     <div class="invalid-feedback">
                         닉네임을 입력해주세요.
                     </div>
                 </div>
                 <div class="mb-3">
-                    <label for="email">이메일</label>
-                    <input type="email" class="form-control" id="email" placeholder="you@example.com" required>
+                    <label>이메일</label>
+                    <input type="email" class="form-control" asp-for="email" placeholder="you@example.com" required>
                     <div class="invalid-feedback">
                         이메일을 입력해주세요.
                     </div>
                 </div>
                 <div class="mb-3">
-                    <label for="email">이메일</label>
-                    <input type="email" class="form-control" id="email" placeholder="you@example.com" required>
+                    <label>핸드폰 번호</label>
+                    <input type="text" class="form-control" asp-for="phone" placeholder="010-0000-1111" required>
                     <div class="invalid-feedback">
-                        이메일을 입력해주세요.
+                        핸드폰번호를 입력해주세요.
                     </div>
-                </div>
-                <div class="mb-3">
-                    <label for="address">주소</label>
-                    <input type="text" class="form-control" id="address" placeholder="서울특별시 강남구" required>
-                    <div class="invalid-feedback">
-                        주소를 입력해주세요.
-                    </div>
-                </div>
-
-                <div class="mb-3">
-                    <label for="address2">상세주소<span class="text-muted">&nbsp;(필수 아님)</span></label>
-                    <input type="text" class="form-control" id="address2" placeholder="상세주소를 입력해주세요.">
                 </div>
                 <hr class="mb-4">
                 <div class="mb-4"></div>

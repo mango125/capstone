@@ -76,8 +76,45 @@ namespace capstone.Controllers
                 return View("Login", memberLogin);
             }
         }
-        public IActionResult Registor()
+        public IActionResult Registor(Member member)
         {
+            ////모델의 유효성검사
+            //if (ModelState.IsValid)
+            //{
+            //    FormattableString query = $"exec ProcMemberAdd {member.userid, member.userpw, member.nickname, member.name})";
+
+            //    Member[] Lmember = _db.Member.FromSql(query).ToArray();
+
+            //    if (member.Length == 1) //멤버가 있을 경우
+            //    {
+            //        if (member[0].userpw.Trim() == memberLogin.userpw.Trim()) //비밀번호가 맞을경우
+            //        {
+            //            //로그인 처리
+            //            HttpContext.Session.SetString("userid", member[0].userid);
+            //            ViewBag.Member = member[0]; //ViewBag에 불러온 멤버의 정보 입력
+            //            return RedirectToAction("Index", "Home");
+            //        }
+            //        else
+            //        {
+            //            //비밀번호 틀린경우
+            //            ViewData["Error"] = "비밀번호가 일치하지 않습니다.";
+            //            return View("Login", memberLogin);
+            //        }
+            //    }
+            //    else
+            //    {
+            //        //존재하지 않는 아이디
+            //        ViewData["Error"] = "비밀번호가 일치하지 않습니다.";
+            //        return View("Login", memberLogin);
+            //    }
+            //}
+            //else
+            //{
+            //    //아이디, 비밀번호 미입력
+            //    ViewData["Error"] = "아이디와 비밀번호를 입력해주세요.";
+            //    return View("Login", memberLogin);
+            //}
+
             return View();
         }
         public IActionResult Logout(Member memberLogin)

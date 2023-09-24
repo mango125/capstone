@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using capstone.Models;
 using capstone.DataContext;
 using System.Diagnostics.Metrics;
+using Microsoft.Identity.Client;
 
 namespace capstone.Controllers
 {
@@ -14,13 +15,30 @@ namespace capstone.Controllers
         {
             _db = db;
         }
-        public IActionResult CategoryList()
+        public IActionResult CategoryList(string categoryId)
         {
-            FormattableString query = $"select * from product_info";
-            ProductInfo[] productinfo = _db.ProductInfo.FromSql(query).ToArray();
+            
+            if (categoryId == "mainboard") 
+            {
+                FormattableString query = $"select * from View_product_mainboard where productCategory = 'mainboard'";
+                //FormattableString query = $"select * from product_info";
+                Product_Mainboard[] product_Mainboards = _db.Product_Mainboard.FromSql(query).ToArray();
+                //ProductInfo[] productinfo = _db.ProductInfo.FromSql(query).ToArray();
 
-            ViewBag.productInfo = productinfo;
+                ViewBag.productInfo = product_Mainboards;
+                //ViewBag.productInfo = productinfo;
+            }
+            else if (categoryId == "CPU")
+            {
+                FormattableString query = $"select * from product_info";
+                ProductInfo[] productinfo = _db.ProductInfo.FromSql(query).ToArray();
 
+                ViewBag.productInfo = productinfo;
+            }
+
+            
+
+            
             return View();
         }
         public IActionResult Search()
