@@ -7,6 +7,7 @@
     선택된 check박스들은 submit 신호를 보내면 form내에 있는 정보들을 읽어와 해당 정보에 맞는 카테고리로 검색을 하도록 함
 
 *@
+@using Microsoft.AspNetCore.Http
 <style>
     .categoryclass{
         position:fixed;
@@ -14,13 +15,14 @@
         margin-left:-800px;
     }
 </style>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
     //입력받은 GET방식 URL을 읽어 해당 값에 맞는 옵션창 띄워주기
     window.onload = function () {
-        // 페이지가 로딩된 후 실행할 코드를 여기에 작성
+         //페이지가 로딩된 후 실행할 코드를 여기에 작성
         var queryString = window.location.search;
         var urlParams = new URLSearchParams(queryString);
-        var name = urlParams.get('categoryId');
+        var name = urlParams.get('category');
         switch (name)
         {
             case 'CPU':
@@ -45,7 +47,6 @@
                 document.querySelector('input[name="category"][value="HDD"]').checked = true;
                 break;
             default:
-                document.querySelector('input[name="category"][value="mainboard"]').checked = true;
                 break;
         }
         document.getElementById(name+'Details').style.display = 'table';
@@ -68,12 +69,16 @@
             var selectedDiv = document.getElementById(selectedValue + 'Details');
             if (selectedDiv) {
                 selectedDiv.style.display = 'block';
+                document.getElementById('productForm').submit();
             }
+
+            //window.location.href = '/Product/CategoryList?categoryId=' + selectedValue;
         }
 
         // 라디오 버튼에 이벤트 핸들러 연결
         radioButtons.forEach(function (radio) {
             radio.addEventListener('change', handleRadioChange);
+            
         }
         
         );
@@ -82,41 +87,64 @@
     };
 
 
-    // 폼 제출 시 실행할 함수
-    function handleSubmit(event) {
-        event.preventDefault(); // 폼의 기본 동작을 중지 (페이지 새로고침 방지)
+    $(document).ready(function () {
+        // 제출 버튼 클릭 이벤트 핸들러
+        $("#searchBtn").click(function () {
+            // 폼 데이터를 가져옴
+            var formData = $("#formProductInfo").serialize();
 
-        // 폼 데이터 가져오기
-        var formData = new FormData(event.target);
+            alert(formData);
+            // Ajax 요청을 보냄
+            $.ajax({
+                type: "GET", // "GET" 요청
+                url: "/Product/CategoryList/", // 폼 데이터를 보낼 컨트롤러 및 액션 지정
+                data: formData, // 폼 데이터 전송
+                success: function (response) {
+                    // 서버 응답을 처리하고 결과를 표시
+                    $("#result").html(response);
+                },
+                error: function (error) {
+                    // 에러 처리
+                    console.log("에러 발생: " + error);
+                }
+            });
+        });
+    });
 
-        // 여기에서 추가적인 JavaScript 코드 실행 가능
-        // 예: 데이터 전송, 유효성 검사 등
+    // data속성을 이용한 Razor 뷰 값 전달
+    // 체크박스 변경 이벤트 핸들러 등록
+    $(document).ready(function () {
+        // 특정 name 속성을 가진 체크박스 그룹에 대한 이벤트 핸들러 등록
+        $("input[type='checkbox']").change(function () {
+            // 폼 데이터를 가져옴
+            var formData = $("#formProductInfo").serialize();
 
-        // 예시: FormData 내용을 콘솔에 출력
-        for (var pair of formData.entries()) {
-            console.log(pair[0] + ': ' + pair[1]);
-        }
-    }
+            alert(formData);
+            // Ajax 요청
+            $.ajax({
+                type: "GET", // "GET" 요청
+                url: $("input[type='checkbox']").attr("ReturnHome"), // 폼 데이터를 보낼 컨트롤러 및 액션 지정
+                data: formData, // 폼 데이터 전송
+                success: function (response) {
+                    // 서버 응답을 처리하고 결과를 표시
+                    //window.location.href = response;
+                    $("#result").html(response);
+                },
+                error: function (error) {
+                    // 에러 처리
+                    console.log("에러 발생: " + error);
+                }
+            });
+        });
 
-    // 폼 요소에 이벤트 핸들러 등록
-    var form = document.getElementById('myForm');
-    form.addEventListener('submit', handleSubmit);
+    });
+
 
 
 </script>
 
 
-<div class="categoryclass">  <!--좌측 리스트 내용-->
-    <div class="list-group">
-        <a href="#" class="list-group-item">CPU</a>
-        <a href="#" class="list-group-item">그래픽카드</a>
-        <a href="#" class="list-group-item">RAM</a>
-        <a href="#" class="list-group-item">케이스</a>
-        <a href="#" class="list-group-item active">메인보드</a>
-        <a href="#" class="list-group-item">저장장치</a>
-        <!-- 카테고리 항목을 추가할 수 있습니다 -->
-    </div>
-</div>
+
 <div class="container">
     <div class="row">
             <div class="col">  <!--본문내용-->
@@ -124,7 +152,7 @@
                 <h2>카테고리 선택 페이지 입니다.</h2>
                 <!--상단 카테고리 테이블-->
                 <!--폼 태그를 활용하여 검색부분 기능 구현-->
-                 <form asp-controller="Product" asp-action="CategoryList" method="get">
+                <form asp-controller="Product" asp-action="CategoryList" method="get" id="formProductInfo">
 
                 <table class="table-responsive">
                     <table class="table table-bordered ">
@@ -253,18 +281,18 @@
                     <div style="text-align: left;  margin-bottom:10px;">
                         @* 컨텐츠를 우측 정렬, 기타 나머지 Search 옵션들을 배치 *@
                         <div style="display: inline-block; margin-right:190px;">
-                            <select class="form-select" style="width: auto; vertical-align: top;">
+                            <select class="form-select" style="width: auto; vertical-align: top;" name="sort">
                                 @* 셀렉션 옵션 명 가격순은 오름차순, 내림차순 그리고 리뷰는 REV로 지정 *@
-                                <option value="DES">낮은가격순</option>
+                                <option value="DES" selected>낮은가격순</option>
                                 <option value="ASC">높은가격순</option>
                                 <option value="REV">리뷰많은순</option>
                             </select>
                         </div>
                         <div style="display: inline-block; vertical-align: top; margin-right: 10px;">
-                            <input type="search" class="form-control" placeholder="Search..." aria-label="Search" style="width:400px;">
+                            <input type="search" class="form-control" name="productname" placeholder="Search..." aria-label="Search" style="width:400px;" value="">
                         </div>
                         <div style="display: inline-block;">
-                            <button type="button" class="btn btn-primary">검색하기</button>
+                            <button type="submit" class="btn btn-primary" id="searchBtn">검색하기</button>
                         </div>
                         
                     </div> @*하단 정렬, 검색 기능들*@
@@ -284,24 +312,35 @@
                             </tr>
                         </thead>
                         <tbody>
-                             @foreach (var product in ViewBag.productInfo) @*컨트롤러에서 ViewBag으로 정보를 줌*@
+                        @foreach (var product in ViewBag.productInfo) @*컨트롤러에서 ViewBag으로 정보를 줌*@
+                        {
+                            switch ((string)product.productCategory)
                             {
-                            <tr style="vertical-align: middle;">
+                                case "mainboard":
+                                        <tr style="vertical-align: middle;">
 
-                                <td><a href="/Product/Read?@product.productNum"><img src="@product.productImage" style="width: 200px;height:200px" /></a></td>
-                                <td>
-                                   
-                                <a href="/Product/Read?@product.productNum">@product.productName</a><div class="small text-muted">
-                                        소켓:@product.mainboardCpuSocket / 칩셋:@product.mainboardChipset / 폼펙터:@product.mainboardFormfactor <br />메모리:@product.mainboardRamSocket / 렘슬롯:@product.mainboardMemorySlots 2개 <br />
-                                        <br /><br />
-                                        @*등록일:2023.01.01 | 리뷰갯수:1,000개*@
-                                    </div>
-                                </td>
-                                <td class="text-center">
-                                    <h5> @string.Format("{0:#,0}", @product.productPrice)</h5><button type="button" class="btn btn-primary">구매하기</button><i class="bi bi-bucket"></i>
-                                </td> 
-                            </tr>
+                                        <td><a asp-controller="Product" asp-action="ProductInfo" asp-route-category=@product.productCategory asp-route-productNum=@product.productNum><img src="@product.productImage" style="width: 200px;height:200px" /></a></td>
+                                            <td>
+
+                                            <a href="/Product/ProductInfo?@product.productNum">@product.productName</a><div class="small text-muted">
+                                                    소켓:@product.mainboardCpuSocket / 칩셋:@product.mainboardChipset / 폼펙터:@product.mainboardFormfactor <br />메모리:@product.mainboardRamSocket / 렘슬롯:@product.mainboardMemorySlots 2개 <br />
+                                                    <br /><br />
+                                                    @*등록일:2023.01.01 | 리뷰갯수:1,000개*@
+                                                </div>
+                                            </td>
+                                            <td class="text-center">
+                                                <h5> @string.Format("{0:#,0}", @product.productPrice)</h5><button type="button" class="btn btn-primary">구매하기</button><i class="bi bi-bucket"></i>
+                                            </td>
+                                        </tr>
+                                    @* }*@
+                                    break;
+                                default:
+                                    <span>@product.ToString</span>
+                                break;
                             }
+
+                        }
+                        
                         </tbody>
                     </table>
         </div>

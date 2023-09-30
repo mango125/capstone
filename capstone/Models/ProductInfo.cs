@@ -48,6 +48,7 @@ namespace capstone.Models
         public string mainboardChipset { get; set; }
         public int mainboardMemorySlots { get; set; }
 
-        
+
+
     }
 }

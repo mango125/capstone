@@ -4,19 +4,122 @@
 @{
     ViewData["Title"] = "컴퓨터 쇼핑몰";
 }
-<table class="table">
-    <thead>
-        <tr>
-            <td>
-                <img src="~/images/B660_Mainboard.jpg" width="500px" height="500px"/>
-            </td>
-            <td class="align-content-center">
-                <br />
-                <h2>B660 메인보드</h2><br /><br />
-                <h3>100,000원</h3><br /><hr />
-                <input type="button" class="btn btn-primary" value="장바구니" asp-area="" asp-controller="User" asp-action="Cart" />
-                <input type="button" class="btn btn-primary" value="즉시구매" asp-area="" asp-controller="User" asp-action="Payment" />
-            </td>
-        </tr>
-    </thead>
-</table>
+<script>
+
+
+</script>
+<style>
+    /*테이블의 회색 border 스타일*/
+    thead {
+        border: 1px solid skyblue;
+    }
+    th{
+        padding: 10px;
+    }
+    /*div 내 요소들을 정렬하기 위한 컨테이너 스타일*/
+    #relative_div {
+        position: relative;
+    }
+
+    /*div 내 요소들을 하단으로 보내기 위한 스타일*/
+    #bottom_div {
+        position: absolute;
+        bottom: 0px;
+    }
+</style>
+<div class="container">
+
+
+
+    @foreach (var product in ViewBag.productInfo)
+    {
+        if (product.mainboardFormfactor != null)
+        {
+            <table>
+                <thead>
+                    <tr>
+                        <th>
+                            <div class="row">
+                                    <div class="col">
+                                        <div>
+                                            <img src="@product.productImage" style="width:350px; height:350px" />
+                                        </div>
+                                        <div style="text-align:center; margin-right: 20px;">    리뷰수: <span style="font-size:20px">100</span>구매수: <span style="font-size:20px">100</span></div>
+                                    </div>
+                                    <div style="height:100%;" class="col">
+                                        @*상품 이미지 우측의 정보들*@
+                                        <div>
+                                            <h2>@product.productName</h2>
+                                        </div>
+                                        <div style="text-align: right;">
+                                            상품가: <strong>@string.Format("{0:#,0}", @product.productPrice)원</strong>
+                                        </div>
+
+                                        <hr>
+                                        <div style="margin:15px; border: 1px solid gray;">
+                                            @*택배 관련 블록*@
+                                            @*택배 아이콘*@
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-truck" viewBox="0 0 25 25">
+                                                <path d="M0 3.5A1.5 1.5 0 0 1 1.5 2h9A1.5 1.5 0 0 1 12 3.5V5h1.02a1.5 1.5 0 0 1 1.17.563l1.481 1.85a1.5 1.5 0 0 1 .329.938V10.5a1.5 1.5 0 0 1-1.5 1.5H14a2 2 0 1 1-4 0H5a2 2 0 1 1-3.998-.085A1.5 1.5 0 0 1 0 10.5v-7zm1.294 7.456A1.999 1.999 0 0 1 4.732 11h5.536a2.01 2.01 0 0 1 .732-.732V3.5a.5.5 0 0 0-.5-.5h-9a.5.5 0 0 0-.5.5v7a.5.5 0 0 0 .294.456zM12 10a2 2 0 0 1 1.732 1h.768a.5.5 0 0 0 .5-.5V8.35a.5.5 0 0 0-.11-.312l-1.48-1.85A.5.5 0 0 0 13.02 6H12v4zm-9 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm9 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z" />
+                                            </svg>
+                                            <span>금일 오후 5시 이전 주문시</span>
+                                            <span>당일출고!</span>
+                                        </div>
+                                        <span style="display: flex; justify-content: center;">
+                                            <button class="btn btn-primary" style="font-size: 16px; width:45%; margin-right: 10px;">
+                                            <i class="bi bi-wallet2"></i>
+                                                구매하기
+                                            </button>
+                                            <button class="btn btn-outline-primary" style="font-size: 16px; width:45%">
+                                            <i class="bi bi-cart"></i>장바구니
+                                            </button>
+                                        </span>
+                                    </div>
+                            </div>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody> @*상세페이지 바디부분*@
+                    <tr>
+                        <td>
+                            <div class="row">
+                                <div class="col">
+                                    <div class="row">
+                                        <div class="col">
+                                            제조사: @product.productManufacturer
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            폼펙터: @product.mainboardFormfactor
+                                        </div>
+                                        <div class="col">
+                                            CPU소켓: @product.mainboardCpuSocket
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            폼펙터: @product.mainboardFormfactor
+                                        </div>
+                                        <div class="col">
+                                            Ram소켓: @product.mainboardRamSocket
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            칩셋: @product.mainboardChipset
+                                        </div>
+                                        <div class="col">
+                                            메모리 슬롯: @product.mainboardMemorySlots
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            @Html.Raw(product.productDescriptionHtml)
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            }
+        }
+</div>
