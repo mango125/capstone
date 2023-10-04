@@ -29,7 +29,7 @@ namespace capstone.Controllers
 
             if (categoryId[0] == "mainboard") 
             {
-                var Selectedmanufacturer = request.Query["manufacturer"].ToList();
+                var Selectedmanufacturer = request.Query["manufacturer"].ToArray();
                 if(Selectedmanufacturer.Any())
                 {
                     query = $"select * from View_product_mainboard where productManufacturer = {Selectedmanufacturer}";

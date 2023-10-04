@@ -20,4 +20,20 @@ namespace capstone.Models
         public DateTime joindate { get; set; }
 
     }
+    public class Order_Detail
+    {
+        public int orderNum { get; set; }
+        public String userid { get; set; }
+        public int price{ get; set; }
+        public int deliveryfee{ get; set; }
+        public DateTime orderdate{ get; set; }
+        public bool paymentstatus { get; set; }
+        public bool deliverystatus { get; set; }
+        public DateTime? deliverycompletiondate { get; set; }
+        [Key]
+        public int orderdetailNum { get; set; }
+        public int productNum { get; set; }
+        public int quantity { get; set; }
+    }
+
 }

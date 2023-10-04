@@ -11,6 +11,8 @@ namespace capstone.DataContext
         }
 
         public DbSet<Member> Member { get; set; }
+
+        public DbSet<Order_Detail> Order_Detail { get; set; }
         public DbSet<MemberLogin> MemberLogin { get; set; }
         public DbSet<ProductInfo> ProductInfo { get; set; }
         public DbSet<Product_Mainboard> Product_Mainboard { get; set;}

@@ -113,31 +113,31 @@
 
     // data속성을 이용한 Razor 뷰 값 전달
     // 체크박스 변경 이벤트 핸들러 등록
-    $(document).ready(function () {
-        // 특정 name 속성을 가진 체크박스 그룹에 대한 이벤트 핸들러 등록
-        $("input[type='checkbox']").change(function () {
-            // 폼 데이터를 가져옴
-            var formData = $("#formProductInfo").serialize();
+    //$(document).ready(function () {
+    //    // 특정 name 속성을 가진 체크박스 그룹에 대한 이벤트 핸들러 등록
+    //    $("input[type='checkbox']").change(function () {
+    //        // 폼 데이터를 가져옴
+    //        var formData = $("#formProductInfo").serialize();
 
-            alert(formData);
-            // Ajax 요청
-            $.ajax({
-                type: "GET", // "GET" 요청
-                url: $("input[type='checkbox']").attr("ReturnHome"), // 폼 데이터를 보낼 컨트롤러 및 액션 지정
-                data: formData, // 폼 데이터 전송
-                success: function (response) {
-                    // 서버 응답을 처리하고 결과를 표시
-                    //window.location.href = response;
-                    $("#result").html(response);
-                },
-                error: function (error) {
-                    // 에러 처리
-                    console.log("에러 발생: " + error);
-                }
-            });
-        });
+    //        alert(formData);
+    //        // Ajax 요청
+    //        $.ajax({
+    //            type: "GET", // "GET" 요청
+    //            url: $("input[type='checkbox']").attr("ReturnHome"), // 폼 데이터를 보낼 컨트롤러 및 액션 지정
+    //            data: formData, // 폼 데이터 전송
+    //            success: function (response) {
+    //                // 서버 응답을 처리하고 결과를 표시
+    //                //window.location.href = response;
+    //                $("#result").html(response);
+    //            },
+    //            error: function (error) {
+    //                // 에러 처리
+    //                console.log("에러 발생: " + error);
+    //            }
+    //        });
+    //    });
 
-    });
+    //});
 
 
 
@@ -325,11 +325,12 @@
                                             <a href="/Product/ProductInfo?@product.productNum">@product.productName</a><div class="small text-muted">
                                                     소켓:@product.mainboardCpuSocket / 칩셋:@product.mainboardChipset / 폼펙터:@product.mainboardFormfactor <br />메모리:@product.mainboardRamSocket / 렘슬롯:@product.mainboardMemorySlots 2개 <br />
                                                     <br /><br />
-                                                    @*등록일:2023.01.01 | 리뷰갯수:1,000개*@
                                                 </div>
                                             </td>
                                             <td class="text-center">
-                                                <h5> @string.Format("{0:#,0}", @product.productPrice)</h5><button type="button" class="btn btn-primary">구매하기</button><i class="bi bi-bucket"></i>
+                                            <h4 class="m-3"> @string.Format("{0:#,0}", @product.productPrice)원</h4>
+                                            <div><a asp-controller="Member" asp-action="Checkout" asp-route-productNum="@product.productNum"><button type="button" id="CheckOutBtn" class="btn btn-primary mb-1"><i class="bi bi-wallet2"></i> 구매하기</button></a></div>
+                                            <div><button type="button" id="CartBtn" class="btn btn-outline-primary" asp-controller="Member" asp-action="Cart"><i class="bi bi-cart"></i> 장바구니</button></div>
                                             </td>
                                         </tr>
                                     @* }*@
