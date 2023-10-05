@@ -5,35 +5,91 @@
     ViewData["Title"] = "로그인";
 }
 @model MemberLogin
+<style>
+    body {
+        background-color: #f9f9f9;
+    }
+    .content_container{
+        background-color: #ffffff;
+        padding: 10px;
+        border: 1px solid #dfdfdf;
+        border-radius: 3px;
+    }
 
+    .leftHr {
+        float: left;
+        width: 35%;
+        box-sizing: border-box;
+    }
+
+    .or {
+        /*float: left;
+        width: 17%;
+        margin: 2px 5%;*/
+        font-size: 11px;
+        /*box-sizing: border-box;*/
+        color: #999999;
+        /*font-size: 14px;*/
+        /*font-weight: 700;
+        margin: 0px 12px;*/
+    }
+
+    .rightHr {
+        float: right;
+        width: 35%;
+        box-sizing: border-box;
+    }
+    input{
+        background-color: #f9f9f9;
+    }
+    .signin{
+        color: #0000ff;
+        display: inline;
+        font-size:12px;
+        box-sizing: initial;
+    }
+
+    .noneunderline {
+        text-decoration: none;
+    }
+
+</style>
 <body class="text-center">
 
     <!--  html 전체 영역을 지정하는 container -->
-    <div id="container">
+    <div class="container content_container">
         @*login 폼 영역을 : loginBox*@
-        <div id="loginBox">
+        <div>
             @*로그인 기능을 위한 asp구문*@
             <form asp-action="LoginProc" asp-controller="Member">
                 <!-- 로그인 페이지 타이틀 -->
-                <div id="loginBoxTitle"><h5>로그인 해 주세요.</h5></div><br />
+                <div id="loginBoxTitle" class="m-4"><h5>Login Page.</h5></div>
                 <!-- 아이디, 비번, 버튼 박스 -->
-                <div id="inputBox">
+                <div class="align-content-center m-3">
                     @*아이디 입력 창*@
                     <div class="input-form-box">
-                        <span asp-validation-for="userid">아이디</span>
-                            <input type="text" asp-for="userid" class="form-control" />
+                            <input type="text" asp-for="userid" class="form-control mb-2" placeholder="아이디" />
                     </div>
                     @*비밀번호 입력 창*@
                     <div class="input-form-box">
-                        <span asp-validation-for="userpw">비밀번호 </span>
-                        <input type="password" asp-for="userpw" class="form-control" />
+                        <input type="password" asp-for="userpw" class="form-control mb-2" placeholder="비밀번호" />
                     </div>
+                    <div class="mb-2">
+                        <button type="submit" class="btn btn-primary" style="width:100%">Login</button> 
+                        </div>
+
                     <div>
-                        <br />
-                        <button type="submit" class="btn btn-primary">로그인</button> 
-                        &nbsp;
-                        <button type="button" onclick="window.location.href='/Member/Registor';" class="btn btn-primary">회원가입</button>
+                        <div class="mb-2">
+                            @*<hr class="leftHr">*@
+                            <div class="or">또는</div>
+                            @*<hr class="rightHr">*@
+                        </div>
+
                     </div>
+                        <div style="display: inline; width:50px;">
+                            <a href="/Member/Registor" class="signin noneunderline">아이디가 없으신가요?</a>
+                            @*<button type="button" onclick="window.location.href='/Member/Registor';" class="btn btn-primary">회원가입</button>*@
+                        </div>
                 </div>
             </form>
         </div>

@@ -28,3 +28,29 @@ body {
     width: 1200px;
     height: 700px;
 }
+.sidebar{
+    height: 100vh;
+    /*background: linear-gradient(rgba(0,0,0,.7), rgba(0,0,0,0.9). url(images/main_bg.jpg));*/
+    background-color:#999999;
+    background-position: center;
+    /*background-repeat: no-repeat;*/
+    background-size: cover;
+    box-shadow: 5px 7px 25px #999;
+}
+
+.bottom-border{
+    border-bottom: 2px groove #eee;
+}
+
+.input-form {
+    max-width: 680px;
+    margin-top: 80px;
+    padding: 32px;
+    background: #fff;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    -webkit-box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15);
+    -moz-box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15);
+    box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
+}
