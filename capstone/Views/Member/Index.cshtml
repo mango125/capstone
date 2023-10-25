@@ -4,10 +4,19 @@
 @{
     ViewData["Title"] = "마이페이지";
 }
-<div class="alert" role="alert">@ViewBag.Member.name</div>
-<div class="container">
+<style>
+    .body{
+        font-size: 18px;
+    }
+    
+</style>
+
+<div class="bg-primary text-white border-radius p-1" style="text-align:center">
+    <span class="fs-3 fw-bold">@(ViewBag.Member.name)님의 주문 리스트</span>
+    </div>
+<div class="container input-form">
     <!--주문 내역-->
-    <div>
+    @*<div>
         @foreach (var order in ViewBag.orders)
         {
             <div>
@@ -30,16 +39,52 @@
             }
             </div>
         }
-    </div>
-    <!--개인정보 수정-->
+    </div>*@
     <div>
-        <div>
-            *표시는 필수 입력 표시입니다.
-        </div>
-        사용자명: @ViewBag.Member.nickname
-        이메일: @ViewBag.Member.email
-        전화번호: @ViewBag.Member.email
-        주소: @ViewBag.Member.address
-        가입일: @ViewBag.Member.joindate
+        @{
+            // 이전 배열 (예를 들어 ViewBag.orders로 가정)
+            var previousArray = ViewBag.orders as Order_Detail[];
+
+            // 현재 배열 (새로운 데이터로 채워질 배열)
+            var currentArray = new Order_Detail[previousArray.Length];
+
+            // 이전 배열을 현재 배열로 복사
+            Array.Copy(previousArray, currentArray, previousArray.Length);
+        }
+        @for (int i = ViewBag.orders.Length -1; i >= 0; i--)
+        {
+            var order = ViewBag.orders[i];
+            var previousOrder = i < ViewBag.orders.Length - 1 ? ViewBag.orders[i + 1] : null;
+
+            
+            if (previousOrder == null || previousOrder.orderNum != order.orderNum ) //조건: 이전값이 현재값과 다를경우와 첫번째 배열인 경우
+            {
+                <div class="mb-1 col">
+                    <span style="font-size: 22px">@order.orderdate.ToString("yyyy. MM. dd") 주문</span>
+                </div>
+            }
+            <div class="border-1 input-form m-1 row">
+                <div class="row">
+                    @if (order.deliverystatus)
+                    {
+                        <p class="align-content-center" style="font-size:18px; "> <span style="color:blue;">배송완료</span> @order.deliverycompletiondate</p>
+                    }
+                    else
+                    {
+                        <p style="font-size:18px; ">배송준비중</p><hr />
+                    }
+                <div class="col-3">
+                    <img src="@order.image" width="75px" height="75px" />
+                </div>
+                <div class="col-6">
+                    <div>@order.name</div>
+                        <div style="font-size: 18px"><span>@string.Format("{0:#,0}",order.product_price)원</span><i class="bi bi-dot"></i><span>@order.quantity 개</span></div>
+                </div>
+                </div>
+                <br>
+            </div>
+        }
+
+    <!--개인정보 수정-->
     </div>
 </div>

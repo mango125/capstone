@@ -149,7 +149,7 @@
     <div class="row">
             <div class="col">  <!--본문내용-->
             <!--상단 카테고리 선택 페이지-->
-                <h2>카테고리 선택 페이지 입니다.</h2>
+                @*<h2>카테고리 선택 페이지 입니다.</h2>*@
                 <!--상단 카테고리 테이블-->
                 <!--폼 태그를 활용하여 검색부분 기능 구현-->
                 <form asp-controller="Product" asp-action="CategoryList" method="get" id="formProductInfo">
@@ -339,12 +339,10 @@
                                     <span>@product.ToString</span>
                                 break;
                             }
-
                         }
-                        
-                        </tbody>
-                    </table>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
-</div>
 </div>

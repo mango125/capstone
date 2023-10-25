@@ -93,9 +93,15 @@
                         <button class="dropdown-item" type="submit" name="category" value="CPU">CPU</button>
                         <button class="dropdown-item" type="submit" name="category" value="VGA">VGA</button>
                         <button class="dropdown-item" type="submit" name="category" value="mainboard">메인보드</button>
+                        <button class="dropdown-item" type="submit" name="category" value="case">케이스</button>
+                        <button class="dropdown-item" type="submit" name="category" value="ram">RAM</button>
+                        <button class="dropdown-item" type="submit" name="category" value="SSD">SSD</button>
+                        <button class="dropdown-item" type="submit" name="category" value="HDD">HDD</button>
                     </form>
                 </div>
             </div>
+
+
                 @*이전방식 드롭다운 리스트*@
                 @*<div class="dropdown">
                 <a class="d-flex align-items-center col-lg-4 mb-2 mb-lg-0 link-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" 
@@ -121,11 +127,11 @@
             </div>*@
             <div style="text-align: right;">
                 <form role="search" asp-area="" asp-controller="Product" asp-action="Search">
-                    <div style="display: inline-block;">
-                        <input type="search" class="form-control" placeholder="Search..." aria-label="Search" style="width: 400px;">
+                    <div style="display: inline-block; margin-right: 10px;">
+                        <input type="search" class="form-control"  placeholder="Search..." aria-label="Search" style="width:400px;" value="">
                     </div>
                     <div style="display: inline-block;">
-                        <button type="button" class="btn btn-primary">검색</button>
+                        <i class="bi bi-search"></i>
                     </div>
                 </form>
             </div>

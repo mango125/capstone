@@ -1,40 +1,383 @@
-﻿<!DOCTYPE html>
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+@{
+    ViewBag.Title = "관리자 페이지";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
 
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
-<head>
-    <meta charset="utf-8" />
-    <title></title>
-</head>
-<body>
-    <div class="container">
-        <table>
-            <tr>
-                <td>
-                    등록할 부품을 선택해주세요
-                </td>
-                <td>
-                    메인보드
-                </td>
-                <td>
-                    CPU
-                </td>
-                <td>
-                    그래픽카드
-                </td>
-                <td>
-                    케이스
-                </td>
-                <td>
-                    HDD
-                </td>
-                <td>
-                    SSD
-                </td>
-                <td>
-                    RAM
-                </td>
-            </tr>
-        </table>
+    //부트스트랩을 이용한 첫번째 열의 클래스
+    var columnClasses = "col-2 white-border bg-primary text-white d-flex align-items-center justify-content-center";
+    var contentClasses = "col p-2 gray-border align-items-top";
+    var CategorycolumnClasses = "col-2 border-bottom border-dark bg-light text-black d-flex align-items-center justify-content-center";
+}
+
+<style>
+    /*CKEditor style*/
+    .ck-editor__editable {
+        height: 400px;
+        width: 800px;
+    }
+    div{
+        
+    }
+    /*base 테이블*/
+    table {
+        width: 1000px;
+        align-content: center;
+        
+    }
+
+        /*태그 선택용 테이블*/
+        table.tags {
+            width: 700px;
+        }
+
+    /*ckEditor용 css*/
+    .ck-content {
+        font-size: 12px;
+    }
+
+    /*상위 레이아웃 부분*/
+    thead {
+        border-bottom: 1px solid #808080;
+    }
+
+    /*태이블의 첫번째 컬럼용 css*/
+    td.color {
+        width: 300px;
+        background-color: lightgray;
+        vertical-align: top;
+        border-bottom: 1px solid #808080;
+        text-align: right;
+    }
+
+    /*이미지 입력용 css*/
+    .image {
+        width: 250px;
+        width: 250px;
+        background-image: url(no_image.jpg)
+    }
+
+    /*태그 입력용 테이블의 td css*/
+    td.tags {
+        width: 150px;
+        text-align: right;
+        background-color: lightcyan;
+        padding-right: 10px;
+    }
+    /*첫번째 컬럼의 소제목*/
+    span.subhead {
+        font-size: 1px;
+    }
+    /*하얀색 하단 테두리*/
+    .white-border {
+        border-bottom: 2px solid #ffffff; /* 하단 테두리를 추가하며, 색상은 흰색(#ffffff)으로 설정합니다. */
+    }
+    /*회색 하단 테두리*/
+    .gray-border {
+        border-bottom: 2px solid #808080; /* 하단 테두리를 추가하며, 색상은 흰색(#ffffff)으로 설정합니다. */
+    }
+</style>
+
+<!--텍스트 편집기 프레임워크 CKEditor-->
+<script src="https://cdn.ckeditor.com/ckeditor5/37.0.1/classic/ckeditor.js"></script>
+<script>
+    ClassicEditor.create(document.querySelector('#editor'), {
+        language: "ko"
+    });
+
+    //이미지 파일 업로드 및 미리보기
+    function previewFile() {
+        const preview = document.querySelector('#preview');
+        const file = document.querySelector('#fileInput').files[0];
+        const reader = new FileReader();
+
+        reader.onloadend = function () {
+            preview.src = reader.result;
+            preview.style.display = 'block';
+            preview.style.width = '250px';
+            preview.style.height = '250px';
+            preview.style.objectFit = 'cover';
+        };
+
+        if (file) {
+            reader.readAsDataURL(file);
+        } else {
+            preview.src = '';
+            preview.style.display = 'none';
+        }
+    }
+
+
+    //버튼 select시 그에맞는 칸을 설정하는 함수
+    function showDiv(divId) {
+            var divs = document.querySelectorAll('div[name="categoryValue"]');
+        for (var i = 0; i < divs.length; i++) {
+            divs[i].style.display = 'none';
+        }
+        document.getElementById(divId).style.display = 'block';
+    }
+
+    //select 코드
+    //function hideTableRowById(tableRowId) {
+    //    var rowEl = document.getElementById(tableRowId);
+    //    if (rowEl) {
+    //        rowEl.style.display = 'none';
+    //    }
+    //}
+
+    //var selectEl = document.querySelector('select[name="ptags"]');
+
+    //if (selectEl !== null) {
+    //    selectEl.addEventListener('change', function () {
+    //        console.log(selectEl);
+    //        var selectedValue = selectEl.value;
+    //        hideTableRowById('cpu');
+    //        hideTableRowById('ram');
+    //        hideTableRowById('mainboard');
+    //        hideTableRowById('gpu');
+    //        hideTableRowById('case');
+    //        showTableRowById(selectedValue);
+            
+    //    });
+    //} else {
+    //    console.error('Cannot find the select element.');
+    //}
+
+    //이하 종료
+
+
+</script>
+
+
+<!--
+    pcode : 상품 코드
+    pname : 상품 이름
+    pimg : 상품 이미지
+    ptext : 상품 상세설명
+    pvalue : 상품 가격
+    ptags : 상품 테그
+    pmaker : 상품 제조사
+    -->
+<div class="container-fluid d-flex m-3">
+    <div class="row">
+            <div class="p-3">
+                <strong class="display-6">상품 등록 페이지</strong>
+            </div>
+            <form>
+                <div class="table align-items-center">
+                    <div class="row">
+                        <div class="@columnClasses"><strong>상품 제목[필수]</strong>@*<span class="subhead">노출될 상품의 제목입니다.</span>*@</div>
+                        <div class="col p-2 gray-border" style="border-top: 1px solid #000000"><input type="text" name="pname" size="40" /></div>
+                    </div>
+                    <div class="row">
+                        <div class="@columnClasses"><strong>상품 이미지[필수]</strong>@*<span class="subhead">노출될 상품의 미리보기 이미지입니다.</span>*@</div>
+                        <div class="col p-2 gray-border">
+                            <div class="row">
+                                <input class="form-control input-sm m-lg-2" type="file" name="pimg" id="fileInput" onchange="previewFile()">
+                            </div>
+                            <div class="row">
+                                <img id="preview" style="width: 250px; height: 250px; object-fit: cover; display: none;">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="@columnClasses"><strong>상품 상세설명[필수]</strong>@*<span class="subhead">상품의 상세페이지 입니다.</span>*@</div>
+                        <div class="col p-2 gray-border">
+                            <textarea name="text" id="editor"></textarea>
+                            <!-- 텍스트 편집기 프레임워크 CKEditor CDN -->
+                            <script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/ckeditor.js"></script>
+                            <script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/translations/ko.js"></script>
+                            <script>
+                                ClassicEditor.create(document.querySelector('#editor'), {
+                                    language: "ko"
+                                });
+                            </script>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="@columnClasses"><strong>판매가[필수</strong>]<br />@*<span class="subhead">구매자가 부담하는 금액입니다.</span>*@</div>
+                        <div class="col p-2 gray-border"><input class="form-control-sm" type="text" name="pvalue" size="10" />원</div>
+                    </div>
+                    <div class="row">
+                        <div class="@columnClasses"><strong>운송비용[필수]</strong><br />@*<span class="subhead">운송 시 발생하는 비용입니다.</span>*@</div>
+                        <div class="col p-2 gray-border"><input class="form-control-sm" type="text" name="pdeliveryfee" size="10" />원</div>
+                    </div>
+                    <div class="row">
+                    <div class="@columnClasses">태그선택<br />@*<span class="subhead">상품에 맞는 카테고리를 선택해주세요.</span>*@</div>
+                        <div class="col p-2 gray-border">
+                            <!-- 테그 추가기능 및 세부 테그기능  -->
+                            <label><input type="radio" name="category" value="CPU" onclick="showDiv('cpuValue')" />CPU</label>
+                            <label><input type="radio" name="category" value="VGA" onclick="showDiv('vgaValue')" />그래픽카드</label>
+                        <label><input type="radio" name="category" value="mainboard" onclick="showDiv('mainboardValue')" />메인보드</label>
+                            <label><input type="radio" name="category" value="case" />케이스</label>
+                            <label><input type="radio" name="category" value="ram" />ram</label>
+                            <label><input type="radio" name="category" value="SSD" />SSD</label>
+                            <label><input type="radio" name="category" value="HDD" />HDD</label>
+
+                            @*이전방식 select 구문*@
+                            @*<select class="form-select-sm" name="ptags"
+                                    onchange="var selectedValue = this.value;
+                             hideTableRowById('cpu');
+                             hideTableRowById('ram');
+                             hideTableRowById('mainboard');
+                             hideTableRowById('vga');
+                             hideTableRowById('case');
+                             showTableRowById(selectedValue);">
+                                >
+                                <option value="">태그선택</option>
+                                <option value="cpu">cpu</option>
+                                <option value="ram">ram</option>
+                                <option value="mainboard">mainboard</option>
+                                <option value="vga">vga</option>
+                                <option value="case">case</option>
+                            </select>*@
+                        </div>
+                    </div>
+
+                    <div class="row">
+                    <div class="col-2 border-bottom border-primary bg-primary text-white d-flex align-items-center justify-content-center">
+                        <strong>제조사</strong><br /></div>
+                    <div class="col p-2 gray-border" style="border-bottom: 1px solid #000000">
+                        <label><input type="radio" name="manufacturer" value="ASUS" />ASUS</label>
+                        <label><input type="radio" name="manufacturer" value="MSI" />MSI</label>
+                        <label><input type="radio" name="manufacturer" value="GIGABITY" />GIGABITY</label>
+                        <label><input type="radio" name="manufacturer" value="ASRock" />ASRock</label>
+                        <label><input type="radio" name="manufacturer" value="other" />그 외 &nbsp;
+                            <input type="text" name="manufacturer_other" class="form-control-sm" size="10" />
+                        </label>
+                        </div>
+                    </div>
+                <!--이하종료-->
+                </div>
+            <!--상품 select문-->
+            
+            <!--CPU 태그-->
+            <div class="row" name="categoryValue" id="cpuValue" style="display:none;">
+                <!-- CPU 칩셋 -->
+                <div class="row">
+                    <div class="col-2 border-bottom border-top border-dark bg-light text-black d-flex align-items-center justify-content-center">CPU 칩셋<br /></div>
+                    <div class="col p-2 gray-border" style="border-top: 1px solid #808080">
+                        <label><input type="text" name="cpuCores" class="form-control-sm" size="10" /> 예:인텔I9-13세대</label>
+                    </div>
+                </div>
+
+                <!-- CPU 소켓 -->
+                <div class="row">
+                    <div class="@CategorycolumnClasses">CPU 소켓<br /></div>
+                    <div class="col p-2 gray-border">
+                        <label><input type="radio" name="cpuSocket" value="INTEL1700" />인텔(소켓1700)</label>
+                        <label><input type="radio" name="cpuSocket" value="INTEL1200" />인텔(소켓1200)</label>
+                        <label><input type="radio" name="cpuSocket" value="AM5" />AMD(소켓AM5)</label>
+                        <label><input type="radio" name="cpuSocket" value="AM4" />AMD(소켓AM4)</label>
+                    </div>
+                </div>
+
+                <!-- CPU 코어 수 -->
+                <div class="row">
+                    <div class="@CategorycolumnClasses">CPU 코어 수<br /></div>
+                    <div class="col p-2 gray-border">
+                        <label><input type="text" name="cpuCores" class="form-control-sm" size="10" />&nbsp;개</label>
+                    </div>
+                </div>
+
+                <!-- CPU 쓰레드 -->
+                <div class="row">
+                    <div class="@CategorycolumnClasses">CPU 쓰레드<br /></div>
+                    <div class="col p-2 gray-border">
+                        <label><input type="text" name="cpuThreads" class="form-control-sm" size="10" />&nbsp;쓰레드</label>
+                    </div>
+                </div>
+
+                <!-- CPU 기본 클럭 -->
+                <div class="row">
+                    <div class="@CategorycolumnClasses">CPU 기본 클럭<br /></div>
+                    <div class="col p-2 gray-border">
+                        <label>기본 <input type="text" name="cpuBaseClock" class="form-control-sm" size="10" />&nbsp;GHz</label>
+                    </div>
+                </div>
+
+                <!-- CPU 최대 클럭 -->
+                <div class="row">
+                    <div class="@CategorycolumnClasses">CPU 최대 클럭<br /></div>
+                    <div class="col p-2 gray-border">
+                        <label>최대 <input type="text" name="cpuMaxClock" class="form-control-sm" size="10" />&nbsp;GHz</label>
+                    </div>
+                </div>
+
+                <!-- CPU 내장 그래픽 -->
+                <div class="row">
+                    <div class="@CategorycolumnClasses">CPU 내장 그래픽<br /></div>
+                    <div class="col p-2 gray-border">
+                        <label><input type="radio" name="cpuIntegratedGraphics" value="Yes" />내장 그래픽 있음</label>
+                        <label><input type="radio" name="cpuIntegratedGraphics" value="No" />내장 그래픽 없음</label>
+                    </div>
+                </div>
+
+                <!-- CPU 쿨러 유무 -->
+                <div class="row">
+                    <div class="@CategorycolumnClasses">CPU 쿨러 유무<br /></div>
+                    <div class="col p-2 gray-border">
+                        <label><input type="radio" name="cpuCooler" value="Included" />쿨러 포함</label>
+                        <label><input type="radio" name="cpuCooler" value="Not Included" />쿨러 미포함</label>
+                    </div>
+                </div>
+            </div>
+
+            <!--CPU 태그 종료-->
+
+            <!--mainboard 태그-->
+            <div class="row" name="categoryValue" id="mainboardValue" style="display:none;">
+
+                @* CPU소켓 (mainboardCpuSocket) *@
+                <div class="row">
+                    <div class="col-2 border-bottom border-top border-dark bg-light text-black d-flex align-items-center justify-content-center">CPU 소켓<br /></div>
+                    <div class="col p-2 gray-border" style="border-top: 1px solid #808080">
+                        <label><input type="radio" name="mainboardCpuSocket" value="INTEL1700" />인텔(소켓1700)</label>
+                        <label><input type="radio" name="mainboardCpuSocket" value="INTEL1200" />인텔(소켓1200)</label>
+                        <label><input type="radio" name="mainboardCpuSocket" value="AM5" />AMD(소켓AM5)</label>
+                        <label><input type="radio" name="mainboardCpuSocket" value="AM4" />AMD(소켓AM4)</label>
+                    </div>
+                </div>
+
+                @* 폼펙터 (mainboardFormfactor) *@
+                <div class="row">
+                    <div class="@CategorycolumnClasses ">폼펙터<br /></div>
+                    <div class="col p-2 gray-border">
+                        <label><input type="radio" name="mainboardFormfactor" value="ATX" />ATX(30.5x24.4cm)</label>
+                        <label><input type="radio" name="mainboardFormfactor" value="M-ATX" />M-ATX(24.4x24.4cm)</label>
+                        <label><input type="radio" name="mainboardFormfactor" value="M-iTX" />M-iTX(17.0x17.0cm)</label>
+                        <label><input type="radio" name="mainboardFormfactor" value="E-ATX" />E-ATX(30.5x33.0cm)</label>
+                    </div>
+                </div>
+
+                @* 메모리 종류 (mainboardRamSocket) *@
+                <div class="row">
+                    <div class="@CategorycolumnClasses">메모리 종류<br /></div>
+                    <div class="col p-2 gray-border">
+                        <label><input type="checkbox" name="mainboardRamSocket" value="DDR5" />DDR5</label>
+                        <label><input type="checkbox" name="mainboardRamSocket" value="LPDDR5" />LPDDR5</label>
+                        <label><input type="checkbox" name="mainboardRamSocket" value="DDR4" />DDR4</label>
+                        <label><input type="checkbox" name="mainboardRamSocket" value="LPDDR4" />LPDDR4</label>
+                    </div>
+                </div>
+
+                @* 메모리 슬롯 (mainboardMemorySlots) *@
+                <div class="row">
+                    <div class="@CategorycolumnClasses">메모리 슬롯<br /></div>
+                    <div class="col p-2 gray-border">
+                        <input type="text" name="mainboardMemorySlots" class="form-control-sm" size="10" />개
+                    </div>
+                </div>
+
+            </div>
+            <!--mainboard 태그 종료-->
+
+            <!--select문 종료-->
+            <div>
+                <br />
+                <input class="nav-link link-dark px-6 btn btn-dark" type="submit" value="입력" />
+            </div>
+            </form>
     </div>
-</body>
-</html>
+</div>

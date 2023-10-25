@@ -1,0 +1,233 @@
+﻿<!DOCTYPE html>
+@{
+    var currentPage = Context.Request.Path; // 현재 페이지의 경로를 가져옵니다.
+}
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <sctip>
+        <!-- Custom styles for this template -->
+        <link href="sidebars.css" rel="stylesheet">
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+        <link rel="stylesheet" href="~/capstone.styles.css" asp-append-version="true" />
+        <!-- End of Custom CSS-->
+        <!-- Local Libraries -->
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+        <!-- Jquery -->
+        <script src="~/lib/jquery/dist/jquery.min.js"></script>
+        <!-- End of Local Libraries -->
+        <!-- JavaScript -->
+        <script src="~/js/site.js" asp-append-version="true"></script>
+        <!-- JQuery library -->
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <!-- Popper.js -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+        <!-- Bootstrap Libraries -->
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+        <!-- Bootstrap JavaScript -->
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+        <!-- Bootstrap Icons -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+        <!-- End of Bootstrap Libraries -->
+    </sctip>
+    <style>
+
+        /* 링크의 기본 스타일 */
+        a {
+            color: white; /* 링크의 색상 제거 */
+        }
+
+        /* 링크에 호버 스타일을 적용하려는 경우 */
+        a.hover {
+            color: rgba(0, 0, 0, .85);
+            background-color: #d2f4ea;
+        }
+
+
+        <!--BootStrap Style-->
+        body {
+            min-height: 100vh;
+            min-height: -webkit-fill-available;
+            font-family: "Malgun Gothic", sans-serif;
+        }
+
+        html {
+            height: -webkit-fill-available;
+        }
+
+        main {
+            display: flex;
+            flex-wrap: nowrap;
+            height: 100vh;
+            height: -webkit-fill-available;
+            max-height: 100vh;
+            overflow-x: hidden;
+            overflow-y: auto;
+        }
+
+        .b-example-divider {
+            flex-shrink: 0;
+            width: 1.5rem;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, .1);
+            border: solid rgba(0, 0, 0, .15);
+            border-width: 1px 0;
+            box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
+        }
+
+        .bi {
+            vertical-align: -.125em;
+            pointer-events: none;
+            fill: currentColor;
+        }
+
+        .dropdown-toggle {
+            outline: 0;
+        }
+
+        .nav-flush .nav-link {
+            border-radius: 0;
+        }
+
+        .btn-toggle {
+            display: inline-flex;
+            align-items: center;
+            padding: .25rem .5rem;
+            font-weight: 600;
+            color: rgba(0, 0, 0, .65);
+            background-color: transparent;
+            border: 0;
+        }
+
+        .btn-toggle:hover,
+        .btn-toggle:focus {
+            color: rgba(0, 0, 0, .85);
+            background-color: #d2f4ea;
+        }
+
+        .btn-toggle::before {
+            width: 1.25em;
+            line-height: 0;
+            content: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='rgba%280,0,0,.5%29' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M5 14l6-6-6-6'/%3e%3c/svg%3e");
+            transition: transform .35s ease;
+            transform-origin: .5em 50%;
+        }
+
+        .btn-toggle[aria-expanded="true"] {
+            color: rgba(0, 0, 0, .85);
+        }
+
+        .btn-toggle[aria-expanded="true"]::before {
+            transform: rotate(90deg);
+        }
+
+        .btn-toggle-nav a {
+            display: inline-flex;
+            padding: .1875rem .5rem;
+            margin-top: .125rem;
+            margin-left: 1.25rem;
+            text-decoration: none;
+        }
+
+            .btn-toggle-nav a:hover,
+            .btn-toggle-nav a:focus {
+                background-color: #d2f4ea;
+            }
+
+        .scrollarea {
+            overflow-y: auto;
+        }
+
+        .fw-semibold {
+            font-weight: 600;
+        }
+
+        .lh-tight {
+            line-height: 1.25;
+        }
+
+        <!-- end of BootStrap Style -->
+
+    </style>
+  </head>
+  <body>
+  <!-- Svg Line -->
+  <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+        <symbol id="home" viewBox="0 0 16 16">
+            <path d="M8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4.5a.5.5 0 0 0 .5-.5v-4h2v4a.5.5 0 0 0 .5.5H14a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146zM2.5 14V7.707l5.5-5.5 5.5 5.5V14H10v-4a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v4H2.5z" />
+        </symbol>
+        <symbol id="grid" viewBox="0 0 16 16">
+            <path d="M1 2.5A1.5 1.5 0 0 1 2.5 1h3A1.5 1.5 0 0 1 7 2.5v3A1.5 1.5 0 0 1 5.5 7h-3A1.5 1.5 0 0 1 1 5.5v-3zM2.5 2a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zm6.5.5A1.5 1.5 0 0 1 10.5 1h3A1.5 1.5 0 0 1 15 2.5v3A1.5 1.5 0 0 1 13.5 7h-3A1.5 1.5 0 0 1 9 5.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zM1 10.5A1.5 1.5 0 0 1 2.5 9h3A1.5 1.5 0 0 1 7 10.5v3A1.5 1.5 0 0 1 5.5 15h-3A1.5 1.5 0 0 1 1 13.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zm6.5.5A1.5 1.5 0 0 1 10.5 9h3a1.5 1.5 0 0 1 1.5 1.5v3a1.5 1.5 0 0 1-1.5 1.5h-3A1.5 1.5 0 0 1 9 13.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3z" />
+        </symbol>
+
+  </svg>
+
+      <main class="d-flex">
+        <div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="width: 280px; height:100vh;">
+                    <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
+                        <img src="~/images/logo_layout_short_admin.png" style="height:70px" />
+                    </a>
+                    <hr>
+                    <ul class="nav nav-pills flex-column mb-auto">
+                        <li class="nav-item">
+                            <a asp-controller="Admin" asp-action="Index" class="nav-link text-white @(currentPage == "/Admin" ? "active" : "")">
+                            <i class="bi bi-house-fill"></i>&nbsp;&nbsp;
+                                메인페이지
+                            </a>
+                        </li>
+                        <li>
+                    <a asp-controller="Admin" asp-action="ProductAdd" class="nav-link text-white  @(currentPage == "/Admin/ProductAdd" ? "active" : "")">
+                        <i class="bi bi-box2-fill"></i>&nbsp;&nbsp;
+                                상품관리
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="nav-link text-white">
+                        <i class="bi bi-truck"></i>&nbsp;&nbsp;
+                                배송처리
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="nav-link text-white">
+                        <i class="bi bi-person-fill"></i>&nbsp;&nbsp;
+                                문의관리
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="nav-link text-white">
+                        <i class="bi bi-file-earmark"></i>&nbsp;&nbsp;
+                                리뷰관리
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="nav-link text-white">
+                        <i class="bi bi-graph-up"></i>&nbsp;&nbsp;
+                                매출조회
+                            </a>
+                        </li>
+                    </ul>
+                    <hr>
+                    <div class="dropdown">
+                        <a href="#" class="d-flex align-items-center text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                            <strong>사용자 관리</strong>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
+                            <li><a class="dropdown-item" href="#">사용자 설정</a></li>
+                            <li><a class="dropdown-item" href="#">INFORMATION</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#">로그아웃</a></li>
+                        </ul>
+                    </div>
+            </div>
+        <div class="b-example-divider" style="height: 100vh;"></div>
+        <div style="flex: 1;">
+            @RenderBody()
+        </div>
+        
+    </main>
+</body>
+</html>

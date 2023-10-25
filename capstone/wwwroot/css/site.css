@@ -21,12 +21,19 @@ body {
     justify-content: center;
     align-items: center;
 }
-.bg {
-    background-image: url(../images/main_bg.jpg);
+.bg_main {
+    background-image: url(../images/main_bg.png);
     background-repeat : no-repeat;
     background-size: cover;
-    width: 1200px;
-    height: 700px;
+    width: 1000px;
+    height: 600px;
+}
+.bg_admin {
+    background-image: url(../images/Admin_Mainpage.jpg);
+    background-size: cover; /* 이미지를 화면 전체에 늘립니다 */
+    background-position: center center; /* 이미지를 중앙에 정렬합니다 */
+    background-attachment: fixed; /* 스크롤 시 이미지를 고정시킵니다 */
+    background-repeat: no-repeat; /* 이미지를 반복하지 않도록 설정합니다 */
 }
 .sidebar{
     height: 100vh;
@@ -44,8 +51,8 @@ body {
 
 .input-form {
     max-width: 680px;
-    margin-top: 80px;
-    padding: 32px;
+    margin-top: 10px;
+    padding: 14px;
     background: #fff;
     -webkit-border-radius: 10px;
     -moz-border-radius: 10px;
@@ -53,4 +60,9 @@ body {
     -webkit-box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15);
     -moz-box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15);
     box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
+}
+.border-radius {
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
 }

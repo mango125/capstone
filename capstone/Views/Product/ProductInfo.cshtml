@@ -36,7 +36,7 @@
         if (product.mainboardFormfactor != null)
         {
             <table>
-                <thead>
+                <thead class="border-radius">
                     <tr>
                         <th>
                             <div class="row">
@@ -44,20 +44,41 @@
                                         <div>
                                             <img src="@product.productImage" style="width:350px; height:350px" />
                                         </div>
-                                        <div style="text-align:center; margin-right: 20px;">    리뷰수: <span style="font-size:20px">100</span>구매수: <span style="font-size:20px">100</span></div>
+                                    <div style="text-align:center; margin-right: 20px;">    리뷰수: <span style="font-size:20px">100  </span>&nbsp;&nbsp;  구매수:<span style="font-size:20px">100</span></div>
                                     </div>
                                     <div style="height:100%;" class="col">
                                         @*상품 이미지 우측의 정보들*@
                                         <div>
                                             <h2>@product.productName</h2>
                                         </div>
-                                        <div style="text-align: right;">
-                                            상품가: <strong>@string.Format("{0:#,0}", @product.productPrice)원</strong>
-                                        </div>
 
                                         <hr>
-                                        <div style="margin:15px; border: 1px solid gray;">
-                                        <!-- Truck Icon -->
+                                        <div class="row p-1">
+                                            <div class="col-4">
+                                                배송가능지역
+                                            </div>
+                                            <div class="col-8">
+                                                전국 및 제주도(도서산간 제외)
+                                            </div>
+                                        </div>
+                                    <div class="row p-1">
+                                            <div class="col-4">
+                                                배송비
+                                            </div>
+                                            <div class="col-8">
+                                                무료배송(100,000원 이상 상품)
+                                            </div>
+                                        </div>
+                                    <div class="row p-1">
+                                        <div class="col-4">
+                                            배송기준
+                                        </div>
+                                        <div class="col-8">
+                                            오후 5시 이전 주문 시 당일배송
+                                        </div>
+                                    </div>
+                                       @* <div style="margin:15px; border: 1px solid gray;"> 트럭이미지 폐기 
+
                                         <div class="row">
                                             <div class="col-3" style="display: flex; align-items: center;">
                                                 <i class="bi bi-truck" style="font-size: 100%; line-height: 100%;"></i>
@@ -71,7 +92,13 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        </div>
+                                        </div>*@
+                                    <hr>
+
+                                    <div style="text-align: right; font-size:18px">
+                                        총 상품가: @string.Format("{0:#,0}", @product.productPrice)원
+                                    </div>
+                                    <br>
                                         <span style="display: flex; justify-content: center;">
                                             <button class="btn btn-primary" style="font-size: 16px; width:45%; margin-right: 10px;">
                                             <!-- Wallet Icon -->
@@ -91,6 +118,8 @@
                 <tbody> @*상세페이지 바디부분*@
                     <tr>
                         <td>
+                            <br>
+                            @Html.Raw(product.productDescriptionHtml)
                             <div class="row">
                                 <div class="col">
                                     <div class="row">
@@ -124,7 +153,6 @@
                                     </div>
                                 </div>
                             </div>
-                            @Html.Raw(product.productDescriptionHtml)
                         </td>
                     </tr>
                 </tbody>
