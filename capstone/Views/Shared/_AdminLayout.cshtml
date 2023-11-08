@@ -155,26 +155,15 @@
     </style>
   </head>
   <body>
-  <!-- Svg Line -->
-  <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
-        <symbol id="home" viewBox="0 0 16 16">
-            <path d="M8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4.5a.5.5 0 0 0 .5-.5v-4h2v4a.5.5 0 0 0 .5.5H14a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146zM2.5 14V7.707l5.5-5.5 5.5 5.5V14H10v-4a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v4H2.5z" />
-        </symbol>
-        <symbol id="grid" viewBox="0 0 16 16">
-            <path d="M1 2.5A1.5 1.5 0 0 1 2.5 1h3A1.5 1.5 0 0 1 7 2.5v3A1.5 1.5 0 0 1 5.5 7h-3A1.5 1.5 0 0 1 1 5.5v-3zM2.5 2a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zm6.5.5A1.5 1.5 0 0 1 10.5 1h3A1.5 1.5 0 0 1 15 2.5v3A1.5 1.5 0 0 1 13.5 7h-3A1.5 1.5 0 0 1 9 5.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zM1 10.5A1.5 1.5 0 0 1 2.5 9h3A1.5 1.5 0 0 1 7 10.5v3A1.5 1.5 0 0 1 5.5 15h-3A1.5 1.5 0 0 1 1 13.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zm6.5.5A1.5 1.5 0 0 1 10.5 9h3a1.5 1.5 0 0 1 1.5 1.5v3a1.5 1.5 0 0 1-1.5 1.5h-3A1.5 1.5 0 0 1 9 13.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3z" />
-        </symbol>
-
-  </svg>
-
       <main class="d-flex">
         <div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="width: 280px; height:100vh;">
-                    <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
+                    <a asp-controller="Admin" asp-action="Index" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
                         <img src="~/images/logo_layout_short_admin.png" style="height:70px" />
                     </a>
                     <hr>
                     <ul class="nav nav-pills flex-column mb-auto">
                         <li class="nav-item">
-                            <a asp-controller="Admin" asp-action="Index" class="nav-link text-white @(currentPage == "/Admin" ? "active" : "")">
+                            <a asp-controller="Admin" asp-action="Index" class="nav-link text-white @(currentPage == "/Admin" || currentPage == "/Admin/Index" ? "active" : "")">
                             <i class="bi bi-house-fill"></i>&nbsp;&nbsp;
                                 메인페이지
                             </a>
@@ -211,7 +200,7 @@
                         </li>
                     </ul>
                     <hr>
-                    <div class="dropdown">
+                    @*<div class="dropdown">
                         <a href="#" class="d-flex align-items-center text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
                             <strong>사용자 관리</strong>
                         </a>
@@ -221,6 +210,19 @@
                             <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item" href="#">로그아웃</a></li>
                         </ul>
+                    </div>*@
+
+                    <div class="dropdown">
+                        <button class="d-flex align-items-center text-decoration-none btn btn-primary" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <strong>사용자 관리</strong>
+                        </button>
+
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                            @*폼 태그를 이용한 정보 컨트롤러로 보내기*@
+                                <button class="dropdown-item" type="submit" name="category" value="CPU">사용자 설정</button>
+                                <button class="dropdown-item" type="submit" name="category" value="VGA">INFORMATION</button>
+                    <button class="dropdown-item" type="submit" name="category" value="mainboard"><a href="/Home/Index">로그아웃</a></button>
+                        </div>
                     </div>
             </div>
         <div class="b-example-divider" style="height: 100vh;"></div>
