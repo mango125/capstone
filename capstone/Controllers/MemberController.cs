@@ -87,12 +87,12 @@ namespace capstone.Controllers
         }
         public IActionResult Registor(Member member)
         {
-            ////모델의 유효성검사
+            //모델의 유효성검사
             //if (ModelState.IsValid)
             //{
-            //    FormattableString query = $"exec ProcMemberAdd {member.userid, member.userpw, member.nickname, member.name})";
+            //    FormattableString query = $"exec ProcMemberAdd {member.userid,member.userpw, member.nickname, member.name})";
 
-            //    Member[] Lmember = _db.Member.FromSql(query).ToArray();
+            //    Member[] member = _db.Member.FromSql(query).ToArray();
 
             //    if (member.Length == 1) //멤버가 있을 경우
             //    {

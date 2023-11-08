@@ -152,6 +152,9 @@
                 @*<h2>카테고리 선택 페이지 입니다.</h2>*@
                 <!--상단 카테고리 테이블-->
                 <!--폼 태그를 활용하여 검색부분 기능 구현-->
+            <p>
+                @ViewBag.Strings
+            </p>
                 <form asp-controller="Product" asp-action="CategoryList" method="get" id="formProductInfo">
 
                 <table class="table-responsive">
@@ -283,7 +286,7 @@
                         <div style="display: inline-block; margin-right:190px;">
                             <select class="form-select" style="width: auto; vertical-align: top;" name="sort">
                                 @* 셀렉션 옵션 명 가격순은 오름차순, 내림차순 그리고 리뷰는 REV로 지정 *@
-                                <option value="DES" selected>낮은가격순</option>
+                                <option value="DESC" selected>낮은가격순</option>
                                 <option value="ASC">높은가격순</option>
                                 <option value="REV">리뷰많은순</option>
                             </select>
@@ -299,6 +302,8 @@
                 </table>
                 </form>
                 <div>
+
+                <p>@Model</p>
                     <table class="table">
                         <thead>
                             <tr style="text-align:center">
@@ -307,37 +312,39 @@
                                 </th>
                                 <th>
                                     상품 정보
+
                                 </th>
                                 <td></td>
                             </tr>
                         </thead>
                         <tbody>
-                        @* foreach (var product in ViewBag.productInfo) @*컨트롤러에서 ViewBag으로 정보를 줌
+                        @foreach (var product in ViewBag.productInfo)
+                        @*컨트롤러에서 ViewBag으로 정보를 줌*@
                         {
                             switch ((string)product.productCategory)
                             {
                                 case "mainboard":
-                                        <tr style="vertical-align: middle;">
+                                    <tr style="vertical-align: middle;">
 
                                         <td><a asp-controller="Product" asp-action="ProductInfo" asp-route-category=@product.productCategory asp-route-productNum=@product.productNum><img src="@product.productImage" style="width: 200px;height:200px" /></a></td>
-                                            <td>
+                                        <td>
 
                                             <a href="/Product/ProductInfo?@product.productNum">@product.productName</a><div class="small text-muted">
-                                                    소켓:@product.mainboardCpuSocket / 칩셋:@product.mainboardChipset / 폼펙터:@product.mainboardFormfactor <br />메모리:@product.mainboardRamSocket / 렘슬롯:@product.mainboardMemorySlots 2개 <br />
-                                                    <br /><br />
-                                                </div>
-                                            </td>
-                                            <td class="text-center">
+                                                소켓:@product.mainboardCpuSocket / 칩셋:@product.mainboardChipset / 폼펙터:@product.mainboardFormfactor <br />메모리:@product.mainboardRamSocket / 렘슬롯:@product.mainboardMemorySlots 2개 <br />
+                                                <br /><br />
+                                            </div>
+                                        </td>
+                                        <td class="text-center">
                                             <h4 class="m-3"> @string.Format("{0:#,0}", @product.productPrice)원</h4>
                                             <div><a asp-controller="Member" asp-action="Checkout" asp-route-productNum="@product.productNum"><button type="button" id="CheckOutBtn" class="btn btn-primary mb-1"><i class="bi bi-wallet2"></i> 구매하기</button></a></div>
                                             <div><button type="button" id="CartBtn" class="btn btn-outline-primary" asp-controller="Member" asp-action="Cart"><i class="bi bi-cart"></i> 장바구니</button></div>
-                                            </td>
-                                        </tr>
-                                    @* }
+                                        </td>
+                                    </tr>
+                                    @* }*@
                                     break;
                                 default:
                                     <span>@product.ToString</span>
-                                break;
+                                    break;
                             }
                         } *@
                     </tbody>
